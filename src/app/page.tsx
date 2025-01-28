@@ -4,6 +4,7 @@ import { db } from "@/lib/database";
 export default async function Home() {
   const users = await db
     .selectFrom("User")
+    .innerJoin("Profile", "Profile.userId", "User.id")
     .selectAll()
     .orderBy("name", "asc")
     .execute();
