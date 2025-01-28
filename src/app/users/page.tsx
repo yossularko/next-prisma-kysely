@@ -1,15 +1,15 @@
-import React from 'react'
+import { db } from "@/lib/database";
+import React from "react";
+import UsersPage from "./UsersPage";
 
-const Page = () => {
-  return (
-    <div>
-        {Array(120).fill("a").map((_, idx) => {
-            return(
-                <p key={idx}>User {idx + 1}</p>
-            )
-        })}
-    </div>
-  )
-}
+const Page = async () => {
+  const users = await db
+    .selectFrom("User")
+    .innerJoin("Profile", "Profile.userId", "User.id")
+    .selectAll()
+    .orderBy("name", "asc")
+    .execute();
+  return <UsersPage data={users} />;
+};
 
-export default Page
+export default Page;
