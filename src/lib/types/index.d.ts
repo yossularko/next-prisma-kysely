@@ -10,3 +10,17 @@ export type UserList = {
   bio: string | null;
   userId: number;
 };
+
+export type UserOptionList = {
+  id: number;
+  email: string;
+  name: string | null;
+};
+
+export type PostList = {
+  createdAt: Date;
+  title: string;
+  id: number;
+  content: string | null;
+  author: string | null;
+};

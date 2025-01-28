@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button";
 import { db } from "@/lib/database";
+import HomePage from "./HomePage";
 
 export default async function Home() {
-  const users = await db
-    .selectFrom("User")
-    .innerJoin("Profile", "Profile.userId", "User.id")
-    .selectAll()
-    .orderBy("name", "asc")
-    .execute();
+  const [posts, users] = await Promise.all([
+    db
+      .selectFrom("Post")
+      .innerJoin("User", "User.id", "Post.authorId")
+      .select([
+        "Post.id",
+        "title",
+        "Post.content",
+        "createdAt",
+        "User.name as author",
+      ])
+      .orderBy("createdAt", "desc")
+      .execute(),
+    db.selectFrom("User").selectAll().execute(),
+  ]);
 
-  return (
-    <div>
-      <Button>Click Me</Button>
-      <div>
-        <pre>
-          <code>{JSON.stringify(users, null, 2)}</code>
-        </pre>
-      </div>
-    </div>
-  );
+  return <HomePage posts={posts} users={users} />;
 }
