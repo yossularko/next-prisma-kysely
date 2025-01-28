@@ -9,8 +9,10 @@ import {
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = ({ children }: PropsWithChildren) => {
+  const pathname = usePathname();
   return (
     <div className="relative">
       <div className="fixed w-full backdrop-blur-lg">
@@ -19,14 +21,20 @@ const Navbar = ({ children }: PropsWithChildren) => {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    className={navigationMenuTriggerStyle()}
+                    active={pathname === "/"}
+                  >
                     Home
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Link href="/users" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    className={navigationMenuTriggerStyle()}
+                    active={pathname === "/users"}
+                  >
                     Users
                   </NavigationMenuLink>
                 </Link>
