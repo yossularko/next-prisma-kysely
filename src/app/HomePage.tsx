@@ -115,7 +115,7 @@ const HomePage = ({ posts, users }: Props) => {
                 <FormLabel>Author</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={String(field.value)}
+                  value={String(field.value)}
                 >
                   <FormControl>
                     <SelectTrigger>

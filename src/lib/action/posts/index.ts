@@ -14,8 +14,8 @@ export const createPost = async (
 ): Promise<ActionRes<PostList>> => {
   try {
     const unvalidates: z.infer<typeof postSchema> = {
-      title: body.get("authorId") as string,
-      content: body.get("authorId") as string,
+      title: body.get("title") as string,
+      content: body.get("content") as string,
       authorId: body.get("authorId") as unknown as number,
     };
 
@@ -30,6 +30,13 @@ export const createPost = async (
     }
 
     const { title, content, authorId } = validated.data;
+
+    if (!authorId) {
+      return (initState = {
+        type: "error",
+        error: { message: "Author Id could not be empty", code: 400 },
+      });
+    }
 
     const post = await db
       .insertInto("Post")
