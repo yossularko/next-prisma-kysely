@@ -1,3 +1,5 @@
+"use server";
+
 import { z } from "zod";
 import { ActionRes, PostList } from "@/lib/types";
 import { postSchema } from "./schema";
