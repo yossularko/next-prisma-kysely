@@ -26,6 +26,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import dayjs from "dayjs";
 
 interface Props {
   posts: PostList[];
@@ -146,10 +154,23 @@ const HomePage = ({ posts, users }: Props) => {
           </div>
         </form>
       </Form>
-      <div className="mt-4">
-        <pre>
-          <code>{JSON.stringify(posts, null, 2)}</code>
-        </pre>
+      <hr className="my-8" />
+      <div className="grid grid-cols-1 gap-4">
+        {posts.map((item) => {
+          return (
+            <Card key={item.id}>
+              <CardHeader>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription>
+                  {item.author} | {dayjs(item.createdAt).format("DD MMM YYYY")}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>{item.content}</p>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
