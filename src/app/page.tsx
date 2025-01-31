@@ -10,7 +10,10 @@ export default async function Home() {
         "Post.id",
         "title",
         "Post.content",
+        "published",
         "createdAt",
+        "updatedAt",
+        "authorId",
         "User.name as author",
       ])
       .orderBy("createdAt", "desc")

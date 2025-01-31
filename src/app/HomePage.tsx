@@ -2,7 +2,6 @@
 
 import { createPost } from "@/lib/action/posts";
 import { postSchema } from "@/lib/action/posts/schema";
-import { PostList, UserOptionList } from "@/lib/types";
 import React, { useActionState, useCallback, useTransition } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,10 +33,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import dayjs from "dayjs";
+import { User } from "@prisma/client";
+import { PostList } from "@/lib/types";
 
 interface Props {
   posts: PostList[];
-  users: UserOptionList[];
+  users: User[];
 }
 
 const HomePage = ({ posts, users }: Props) => {

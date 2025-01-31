@@ -53,8 +53,11 @@ export const createPost = async (
       id: post.id,
       title: post.title,
       content: post.content,
+      authorId: post.authorId,
       author: String(post.authorId),
+      published: post.published,
       createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
     };
 
     revalidatePath("/");
